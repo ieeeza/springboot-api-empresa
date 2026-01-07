@@ -14,11 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Data
@@ -27,6 +23,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Table(name = "users")
+@NoArgsConstructor
 public class User {
 
   @Id
@@ -39,7 +36,7 @@ public class User {
   @Column(nullable = false, length = 150)
   private String email;
 
-  @Column(name = "password_hash", nullable = false, length = 255)
+  @Column(name = "password_hash", nullable = false)
   private String passwordHash;
 
   @Enumerated(EnumType.STRING)
@@ -47,7 +44,6 @@ public class User {
   @Builder.Default
   private UserRole role = UserRole.COMMON_USER;
 
-  @Column(length = 255)
   private String token;
 
   @Column(name = "token_expire_at", columnDefinition = "TIMESTAMP WITH TIME ZONE")
